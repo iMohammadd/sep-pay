@@ -25,7 +25,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('transId')->unique();
             $table->string('factorNumber')->nullable();
             $table->string('cardNumber')->nullable();
-            $table->enum('status', ['INIT', 'SUCCESS', 'FAILED'])->default('INIT');
+            $table->enum('status', ['INIT', 'SUCCESS', 'FAILED', 'FRAUD'])->default('INIT');
             $table->timestamps();
         });
     }

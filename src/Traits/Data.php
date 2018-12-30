@@ -2,7 +2,7 @@
 namespace Aries\Seppay\Traits;
 
 trait Data {
-    private $transId;
+    private $token;
     private $amount;
     private $callback;
     private $factorNumber;

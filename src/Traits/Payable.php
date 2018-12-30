@@ -23,7 +23,7 @@ trait Payable {
 
         $this->transactions()->create([
             'amount'        =>  $amount,
-            'transId'       =>  $response->transId,
+            'transId'       =>  $response->token,
             'factorNumber'  =>  $factorNumber,
             'mobile'        =>  $mobile,
             'description'   =>  $description
