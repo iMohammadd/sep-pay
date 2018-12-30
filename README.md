@@ -2,7 +2,6 @@
 ------------
 *Payment Package with Saman Electronic Payment (pay.ir) over iran Shaparak Network for Laravel*
 
-
 ***Update from 1:***
 ---------
 You need to publish Service Provider again and run migration to update transaction table:
@@ -114,3 +113,5 @@ class TestController extends Controller
     }
 }
 ```
+
+Special thanks to [Mohammad Babaei](https://github.com/mohammad6006)
