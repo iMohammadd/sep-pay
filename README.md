@@ -2,6 +2,8 @@
 ------------
 *Payment Package with Saman Electronic Payment (pay.ir) over iran Shaparak Network for Laravel*
 
+[Donate me](https://me.pay.ir/imohammad)
+
 ***Update from 1:***
 ---------
 You need to publish Service Provider again and run migration to update transaction table:
