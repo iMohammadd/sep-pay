@@ -1,8 +1,8 @@
-***Sep Pay***
+***Sep Pay*** [Donate my project](https://me.pay.ir/imohammad)
 ------------
 *Payment Package with Saman Electronic Payment (pay.ir) over iran Shaparak Network for Laravel*
 
-[Donate me](https://me.pay.ir/imohammad)
+
 
 ***Update from 1:***
 ---------
