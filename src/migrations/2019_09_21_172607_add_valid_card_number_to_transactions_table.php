@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateTransactionsTable extends Migration
+class AddValidCardNumberToTransactionsTable extends Migration
 {
     function getTable() {
         return config('seppay.table', 'transactions');
@@ -29,7 +29,7 @@ class UpdateTransactionsTable extends Migration
     public function down()
     {
         Schema::table($this->getTable(), function (Blueprint $table) {
-            $table->dropColumn(['validCardNumber']);
+            $table->dropColumn('validCardNumber');
         });
     }
 }
