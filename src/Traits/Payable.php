@@ -11,7 +11,7 @@ trait Payable {
         return $this->morphMany(Transaction::class, 'payable');
     }
 
-    public function pay($amount, $mobile, $description, $callbackUrl, $factorNumber = null)
+    public function pay($amount, $mobile, $description, $callbackUrl, $factorNumber = null, $validCallNumber = null)
     {
         $payment = new Pay();
         $payment->amount($amount);
@@ -19,14 +19,16 @@ trait Payable {
         $payment->factorNumber($factorNumber);
         $payment->mobile($mobile);
         $payment->description($description);
+        $payment->validCardNumber($validCallNumber);
         $response = $payment->ready();
 
         $this->transactions()->create([
-            'amount'        =>  $amount,
-            'transId'       =>  $response->token,
-            'factorNumber'  =>  $factorNumber,
-            'mobile'        =>  $mobile,
-            'description'   =>  $description
+            'amount'            =>  $amount,
+            'transId'           =>  $response->token,
+            'factorNumber'      =>  $factorNumber,
+            'mobile'            =>  $mobile,
+            'description'       =>  $description,
+            'validCardNumber'   =>  $validCallNumber
         ]);
 
         return $payment->start();

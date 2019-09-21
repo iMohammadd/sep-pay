@@ -10,7 +10,8 @@ class Transaction extends Model {
         'transId',
         'factorNumber',
         'mobile',
-        'traceNumber'
+        'traceNumber',
+        'validCardNumber'
     ];
 
     public function payable()
