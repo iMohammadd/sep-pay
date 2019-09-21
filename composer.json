@@ -10,7 +10,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "doctrine/dbal": "*"
+    },
     "autoload": {
         "psr-4": {
             "Aries\\Seppay\\": "src"

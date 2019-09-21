@@ -8,6 +8,7 @@ trait Data {
     private $factorNumber;
     private $mobile;
     private $description;
+    private $validCardNumber;
 
     public function amount($amount)
     {
@@ -30,5 +31,10 @@ trait Data {
 
     public function description($description = null) {
         $this->description = $description;
+    }
+
+    public function validCardNumber($validCardNumber = null)
+    {
+        $this->validCardNumber = $validCardNumber;
     }
 }

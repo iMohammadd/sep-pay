@@ -15,13 +15,14 @@ class Pay {
 
     public function ready()
     {
-        $params                 =   [];
-        $params['api']          =   config('Seppay.api');
-        $params['amount']       =   $this->amount;
-        $params['factorNumber'] =   $this->factorNumber;
-        $params['redirect']     =   $this->callback;
-        $params['mobile']       =   $this->mobile;
-        $params['description']  =   $this->description;
+        $params                     =   [];
+        $params['api']              =   config('Seppay.api');
+        $params['amount']           =   $this->amount;
+        $params['factorNumber']     =   $this->factorNumber;
+        $params['redirect']         =   $this->callback;
+        $params['mobile']           =   $this->mobile;
+        $params['description']      =   $this->description;
+        $params['validCardNumber']  =   $this->validCardNumber;
 
         # Send initial request to Webservice
         $res = $this->send_request("https://pay.ir/pg/send", $params, false);
