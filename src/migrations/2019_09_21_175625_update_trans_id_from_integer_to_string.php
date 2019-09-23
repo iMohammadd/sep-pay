@@ -17,7 +17,11 @@ class UpdateTransIdFromIntegerToString extends Migration
     public function up()
     {
         Schema::table($this->getTable(), function (Blueprint $table) {
-            $table->string('transId')->unique()->change();
+            $table->dropColumn('transId');
+        });
+
+        Schema::table($this->getTable(), function (Blueprint $table) {
+            $table->string('transId')->unique()->after('amount');
         });
     }
 
@@ -29,7 +33,11 @@ class UpdateTransIdFromIntegerToString extends Migration
     public function down()
     {
         Schema::table($this->getTable(), function (Blueprint $table) {
-            $table->integer('transId')->unique()->change();
+            $table->dropColumn('transId');
+        });
+
+        Schema::table($this->getTable(), function (Blueprint $table) {
+            $table->integer('transId')->unique()->after('amount');
         });
     }
 }

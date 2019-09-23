@@ -4,7 +4,7 @@
 
 
 
-***Update from 1:***
+***Update note:***
 ---------
 You need to publish Service Provider again and run migration to update transaction table:
 ```
@@ -53,9 +53,11 @@ and in your controller you can start a payment like this:
 ```php
 public function payment($id) {
     $bill = Bill::find($id);
-    return $bill->pay(10000, $mobile, $description, $callback_url, $factor_number);
+    return $bill->pay($amount, $mobile, $description, $callback_url, $factor_number, $valid_card_number);
 }
 ```
+
+__*`$factor_number` and `$valid_card_number` is optional and you can set them as `null` or can dont pass them to `pay()` method*__
 
 2. ***With Using Pay() class:***
 
@@ -74,18 +76,21 @@ class TestController extends Controller
     {
         $factor_number = 123;
         $amount = 1000;
+        $valid_card_number = '6037999999999999';
         try {
             $pay = new Pay();
             $pay->amount($amount);
             $pay->factorNumber($factor_number);
+            $pay->validCardNumber($valid_card_number);
             $pay->callback(url('/'));
             $response = $pay->ready();
             
             Transaction::create([
-                'amount'        =>  $amount,
-                'transId'       =>  $response->transId,
-                'factorNumber'  =>  $factor_number,
-                'mobile'        =>  $mobile
+                'amount'            =>  $amount,
+                'transId'           =>  $response->token,
+                'factorNumber'      =>  $factor_number,
+                'validCardNumber'   =>  $valid_card_number,
+                'mobile'            =>  '09123456789'
             ]);
             
             /*
