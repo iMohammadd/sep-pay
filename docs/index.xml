@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docs on Pay.ir Laravel Package</title>
+    <link>/docs/</link>
+    <description>Recent content in Docs on Pay.ir Laravel Package</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 03 Dec 2019 18:01:07 +0330</lastBuildDate>
+    
+	<atom:link href="/docs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Installation</title>
+      <link>/docs/installation/</link>
+      <pubDate>Tue, 03 Dec 2019 18:01:07 +0330</pubDate>
+      
+      <guid>/docs/installation/</guid>
+      <description>install with composer:
+composer require aries/seppay and publish config file and migration file:
+php artisan vendor:publish --provider=&amp;#39;Aries\Seppay\SeppayServiceProvider&amp;#39; then migrate the database:
+php artisan migrate </description>
+    </item>
+    
+    <item>
+      <title>Usage</title>
+      <link>/docs/usage/</link>
+      <pubDate>Tue, 03 Dec 2019 17:17:09 +0330</pubDate>
+      
+      <guid>/docs/usage/</guid>
+      <description>you can set pay.ir api key on config/Seppay.php or on your .env file with SEP_API_KEY
+you have two way to payment:
+ With Trait:  import Payable Trait in a Model you want have Payment:</description>
+    </item>
+    
+    <item>
+      <title>Update</title>
+      <link>/docs/update/</link>
+      <pubDate>Tue, 03 Dec 2019 17:16:55 +0330</pubDate>
+      
+      <guid>/docs/update/</guid>
+      <description>You need to publish Service Provider again and run migration to update transaction table:
+php artisan vendor:publish --provider=&amp;#39;Aries\Seppay\SeppayServiceProvider&amp;#39; php artisan migrate </description>
+    </item>
+    
+  </channel>
+</rss>

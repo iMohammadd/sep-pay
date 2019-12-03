@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Usage - Pay.ir Laravel Package</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" href="/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.d0149e46d37ed09a60f55899204505f757aeb152bb817cdb02a1a2bf5728bb6b.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="/"><img alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="/"><img alt="Logo" src="/images/logo-mobile.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Docs</h4>
+  <ul>
+    
+    <li class="">
+      <a href="/docs/installation/">Installation</a>
+    </li>
+    
+    <li class="active ">
+      <a href="/docs/usage/">Usage</a>
+    </li>
+    
+    <li class="">
+      <a href="/docs/update/">Update</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Usage</h1>
+<div class="content ">
+  <p>you can set <a href="https://pay.ir">pay.ir</a> api key on <code>config/Seppay.php</code> or on your <code>.env</code> file with <code>SEP_API_KEY</code></p>
+<p>you have two way to payment:</p>
+<ol>
+<li><em><strong>With Trait:</strong></em></li>
+</ol>
+<p>import <code>Payable</code> Trait in a Model you want have Payment:</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Aries\Seppay\Traits\Payable</span><span class="p">;</span>
+</code></pre></div><p>and on Model class use <code>Payable</code> Like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">Bill</span> <span class="k">extends</span> <span class="nx">Model</span> <span class="p">{</span>
+    <span class="k">use</span> <span class="nx">Payable</span><span class="p">;</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div><p>and in your controller you can start a payment like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">payment</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$bill</span> <span class="o">=</span> <span class="nx">Bill</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$bill</span><span class="o">-&gt;</span><span class="na">pay</span><span class="p">(</span><span class="nv">$amount</span><span class="p">,</span> <span class="nv">$mobile</span><span class="p">,</span> <span class="nv">$description</span><span class="p">,</span> <span class="nv">$callback_url</span><span class="p">,</span> <span class="nv">$factor_number</span><span class="p">,</span> <span class="nv">$valid_card_number</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><p><strong><em><code>$factor_number</code> and <code>$valid_card_number</code> is optional and you can set them as <code>null</code> or can dont pass them to <code>pay()</code> method</em></strong></p>
+<ol start="2">
+<li><em><strong>With Using Pay() class:</strong></em></li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Aries\Seppay\Pay</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Aries\Seppay\Models\Transaction</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">TestController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">test</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$factor_number</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+        <span class="nv">$amount</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="nv">$valid_card_number</span> <span class="o">=</span> <span class="s1">&#39;6037999999999999&#39;</span><span class="p">;</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nv">$pay</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Pay</span><span class="p">();</span>
+            <span class="nv">$pay</span><span class="o">-&gt;</span><span class="na">amount</span><span class="p">(</span><span class="nv">$amount</span><span class="p">);</span>
+            <span class="nv">$pay</span><span class="o">-&gt;</span><span class="na">factorNumber</span><span class="p">(</span><span class="nv">$factor_number</span><span class="p">);</span>
+            <span class="nv">$pay</span><span class="o">-&gt;</span><span class="na">validCardNumber</span><span class="p">(</span><span class="nv">$valid_card_number</span><span class="p">);</span>
+            <span class="nv">$pay</span><span class="o">-&gt;</span><span class="na">callback</span><span class="p">(</span><span class="nx">url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">));</span>
+            <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$pay</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
+            
+            <span class="nx">Transaction</span><span class="o">::</span><span class="na">create</span><span class="p">([</span>
+                <span class="s1">&#39;amount&#39;</span>            <span class="o">=&gt;</span>  <span class="nv">$amount</span><span class="p">,</span>
+                <span class="s1">&#39;transId&#39;</span>           <span class="o">=&gt;</span>  <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">token</span><span class="p">,</span>
+                <span class="s1">&#39;factorNumber&#39;</span>      <span class="o">=&gt;</span>  <span class="nv">$factor_number</span><span class="p">,</span>
+                <span class="s1">&#39;validCardNumber&#39;</span>   <span class="o">=&gt;</span>  <span class="nv">$valid_card_number</span><span class="p">,</span>
+                <span class="s1">&#39;mobile&#39;</span>            <span class="o">=&gt;</span>  <span class="s1">&#39;09123456789&#39;</span>
+            <span class="p">]);</span>
+            
+            <span class="cm">/*
+</span><span class="cm">             * do anything you want with $response Object
+</span><span class="cm">             * Like: store Transaction ID on your cart with: $response-&gt;transId;
+</span><span class="cm">             */</span>
+            
+            <span class="k">return</span> <span class="nv">$pay</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">callback</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nv">$pay</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Pay</span><span class="p">();</span>
+            <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$pay</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">();</span>
+            
+            <span class="cm">/*
+</span><span class="cm">             * if verification was successful you can send order for your customer
+</span><span class="cm">             */</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>Special thanks to <a href="https://github.com/mohammad6006">Mohammad Babaei</a></p>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  
+
+  
+  
+  
+    
+  
+
+
+</body>
+
+</html>
